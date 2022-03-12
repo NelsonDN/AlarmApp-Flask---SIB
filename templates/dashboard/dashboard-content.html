@@ -1,0 +1,128 @@
+{% extends 'dashboard/index-1.htm' %}
+
+{% block style %}
+ <!-- Favicon icon -->
+    <link rel="icon" href="{{url_for('static',filename='./files/assets/images/logo_sib-icon.png')}}" type="image/x-icon">
+    <!-- Google font-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
+    <!-- Required Fremwork -->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='./files/bower_components/bootstrap/css/bootstrap.min.css')}}">
+    <!-- themify-icons line icon -->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='./files/assets/icon/themify-icons/themify-icons.css')}}">
+    <!-- ico font -->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='./files/assets/icon/icofont/css/icofont.css')}}">
+    <!-- feather Awesome -->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='./files/assets/icon/feather/css/feather.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='./files/assets/icon/ion-icon/css/ionicons.min.css')}}">
+    <!-- Data Table Css -->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='./files/bower_components/datatables.net-bs4/css/dataTables.bootstrap4.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='./files/assets/pages/data-table/css/buttons.dataTables.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='./files/bower_components/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='./files/assets/pages/data-table/extensions/buttons/css/buttons.dataTables.min.css')}}">
+    <!-- Style.css -->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='./files/assets/css/style.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='./files/assets/css/jquery.mCustomScrollbar.css')}}">
+
+{% endblock %}
+
+{% block content %}
+    <div class="page-body">
+        <div class="row">
+            <!-- task, page, download counter  start -->
+            <div class="col-xl-4 col-md-6">
+                <a href="{{url_for('indexUser')}}" >
+                    <div class="card">
+                        <div class="card-block">
+                            <div class="row align-items-center m-l-0">
+                                <div class="col-auto">
+                                    <i class="feather icon-users f-30 text-c-green"></i>
+                                </div>
+                                <div class="col-auto">
+                                    <h6 class="text-muted m-b-10">Users</h6>
+                                    <h2 class="m-b-0">{{nbre_users}}</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-xl-4 col-md-6">
+                <a href="{{url_for('indexAlarm')}}" >
+                    <div class="card">
+                        <div class="card-block">
+                            <div class="row align-items-center m-l-0">
+                                <div class="col-auto">
+                                    <i class="feather icon-clock f-30 text-c-lite-green"></i>
+                                </div>
+                                <div class="col-auto">
+                                    <h6 class="text-muted m-b-10">Alarms</h6>
+                                    <h2 class="m-b-0">{{nbre_alarms}}</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-xl-4 col-md-6">
+                <a href="{{url_for('dashboard')}}" >
+                    <div class="card">
+                        <div class="card-block">
+                            <div class="row align-items-center m-l-0">
+                                <div class="col-auto">
+                                    <i class="feather icon-feather f-30 text-c-pink"></i>
+                                </div>
+                                <div class="col-auto">
+                                    <h6 class="text-muted m-b-10">Projects Launched</h6>
+                                    <h2 class="m-b-0">35</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <!-- task, page, download counter  end -->
+        </div>
+    </div>
+ {% endblock %}
+
+{% block script %}
+<!-- Required Jquery -->
+    <script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/jquery/js/jquery.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/jquery-ui/js/jquery-ui.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/popper.js/js/popper.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/bootstrap/js/bootstrap.min.js')}}"></script>
+    <!-- jquery slimscroll js -->
+    <script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/jquery-slimscroll/js/jquery.slimscroll.js')}}"></script>
+    <!-- modernizr js -->
+    <script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/modernizr/js/modernizr.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/modernizr/js/css-scrollbars.js')}}"></script>
+    <!-- data-table js -->
+    <script src="{{url_for('static',filename='./files/bower_components/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{url_for('static',filename='./files/bower_components/datatables.net-buttons/js/dataTables.buttons.min.js')}}"></script>
+    <script src="{{url_for('static',filename='./files/assets/pages/data-table/js/jszip.min.js')}}"></script>
+    <script src="{{url_for('static',filename='./files/assets/pages/data-table/js/pdfmake.min.js')}}"></script>
+    <script src="{{url_for('static',filename='./files/assets/pages/data-table/js/vfs_fonts.js')}}"></script>
+    <script src="{{url_for('static',filename='./files/assets/pages/data-table/extensions/buttons/js/dataTables.buttons.min.js')}}"></script>
+    <script src="{{url_for('static',filename='./files/assets/pages/data-table/extensions/buttons/js/buttons.flash.min.js')}}"></script>
+    <script src="{{url_for('static',filename='./files/assets/pages/data-table/extensions/buttons/js/jszip.min.js')}}"></script>
+    <script src="{{url_for('static',filename='./files/assets/pages/data-table/extensions/buttons/js/vfs_fonts.js')}}"></script>
+    <script src="{{url_for('static',filename='./files/assets/pages/data-table/extensions/buttons/js/buttons.colVis.min.js')}}"></script>
+    <script src="{{url_for('static',filename='./files/bower_components/datatables.net-buttons/js/buttons.print.min.js')}}"></script>
+    <script src="{{url_for('static',filename='./files/bower_components/datatables.net-buttons/js/buttons.html5.min.js')}}"></script>
+    <script src="{{url_for('static',filename='./files/bower_components/datatables.net-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+    <script src="{{url_for('static',filename='./files/bower_components/datatables.net-responsive/js/dataTables.responsive.min.js')}}"></script>
+    <script src="{{url_for('static',filename='./files/bower_components/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js')}}"></script>
+    <!-- i18next.min.js -->
+    <script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/i18next/js/i18next.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/i18next-xhr-backend/js/i18nextXHRBackend.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/i18next-browser-languagedetector/js/i18nextBrowserLanguageDetector.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/jquery-i18next/js/jquery-i18next.min.js')}}"></script>
+    <!-- Custom js -->
+    <script src="{{url_for('static',filename='./files/assets/pages/data-table/extensions/buttons/js/extension-btns-custom.js')}}"></script>
+    <script src="{{url_for('static',filename='./files/assets/js/pcoded.min.js')}}"></script>
+    <script src="{{url_for('static',filename='./files/assets/js/vartical-layout.min.js')}}"></script>
+    <script src="{{url_for('static',filename='./files/assets/js/jquery.mCustomScrollbar.concat.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='./files/assets/js/script.js')}}"></script>
+    <!-- End EXPORT DATA  -->
+
+{% endblock %}

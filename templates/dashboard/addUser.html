@@ -1,0 +1,232 @@
+{% extends 'dashboard/index-1.htm' %}
+
+{% block style %}
+ <!-- Favicon icon -->
+    <link rel="icon" href="{{url_for('static',filename='./files/assets/images/logo_sib-icon.png')}}" type="image/x-icon">
+    <!-- Google font-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
+    <!-- Required Fremwork -->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='./files/bower_components/bootstrap/css/bootstrap.min.css')}}">
+    <!-- themify-icons line icon -->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='./files/assets/icon/themify-icons/themify-icons.css')}}">
+    <!-- ico font -->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='./files/assets/icon/icofont/css/icofont.css')}}">
+    <!-- feather Awesome -->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='./files/assets/icon/feather/css/feather.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='./files/bower_components/jquery.steps/css/jquery.steps.css')}}">
+
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='./files/assets/pages/j-pro/css/demo.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='./files/assets/pages/j-pro/css/font-awesome.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='./files/assets/pages/j-pro/css/j-pro-modern.css')}}">
+    <!-- Style.css -->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='./files/assets/css/style.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='./files/assets/css/jquery.mCustomScrollbar.css')}}">
+
+{% endblock %}
+
+{% block content %}
+ <!-- task, page, download counter  start -->
+    <div class="page-header">
+        <div class="row align-items-end">
+            <div class="col-lg-8">
+                <div class="page-header-title">
+                    <div class="d-inline">
+                        <h4>Add USER</h4>
+                        <!-- <span>lorem ipsum dolor sit amet, consectetur adipisicing elit</span> -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="page-header-breadcrumb">
+                    <ul class="breadcrumb-title">
+                        <li class="breadcrumb-item">
+                            <a href="{{url_for('dashboard')}}"> <i class="feather icon-home"></i> </a>
+                        </li>
+                        <li class="breadcrumb-item"><a href="{{url_for('addUser')}}">Add a user</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Page-header end -->
+
+        <!-- Page body start -->
+        <div class="page-body">
+            <div class="row">
+                <div class="col-sm-12">
+                    <!-- Contact details card start -->
+                    <div class="card">
+                        <div class="card-block">
+                            <div class="j-wrapper j-wrapper-700">
+                                <form action="http://localhost:5000/ajouter_utilisateur" method="POST" enctype="multipart/form-data" class="j-pro" id="j-pro" novalidate="">
+                                    <!-- end /.header-->
+                                    {{ form.csrf_token }}
+                                    <div class="j-content">
+                                        <!-- start name -->
+                                        <div class="j-unit">
+                                            <label class="j-label" style="color:grey;" >Name</label>
+                                            <div class="j-input">
+                                                <label class="j-icon-right" for="name">
+                            <i class="icofont icofont-ui-user"></i>
+                        </label>
+                                                <input type="text" placeholder="e.g. DADA Nelson" required id="name"  name="name">
+                                                <ul>
+                                                    {% for error in form.name.errors %}
+                                                        <li style="color:red;">{{ error }}</li>
+                                                    {% endfor %}
+                                                </ul>
+
+                                            </div>
+                                        </div>
+                                        <!-- end name -->
+                                        <!-- start email -->
+                                        <div class="j-unit">
+                                            <label class="j-label">Email</label>
+                                            <div class="j-input">
+                                                <label class="j-icon-right" for="email">
+                            <i class="icofont icofont-at"></i>
+                        </label>
+                                                <input type="email" placeholder="email@example.com" required id="email"  name="email">
+                                                <ul>
+                                                    {% for error in form.email.errors %}
+                                                        <li style="color:red;">{{ error }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <!-- end email -->
+                                        <!-- start password -->
+                                        <div class="j-unit">
+                                            <label class="j-label">Password</label>
+                                            <div class="j-input">
+                                                <label class="j-icon-right" for="password">
+                            <i class="icofont icofont-lock"></i>
+                        </label>
+                                                <input type="password" placeholder="password" required id="password"  name="password">
+                                                <ul>
+                                                    {% for error in form.password.errors %}
+                                                        <li style="color:red;">{{ error }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <!-- end password -->
+                                        <!-- start confirm password -->
+                                        <div class="j-unit">
+                                            <label class="j-label">Confirm Password</label>
+                                            <div class="j-input">
+                                                <label class="j-icon-right" for="confirm_password">
+                            <i class="icofont icofont-unlock"></i>
+                        </label>
+                                                <input type="password" placeholder=" " id="confirm_password" required  name="confirm_password">
+                                                 <ul>
+                                                    {% for error in form.confirm_password.errors %}
+                                                        <li style="color:red;">{{ error }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <!-- end confirm password -->
+                                        <!-- start phone -->
+                                        <div class="j-unit">
+                                            <label class="j-label">Phone</label>
+                                            <div class="j-input">
+                                                <label class="j-icon-right" for="phone">
+                            <i class="icofont icofont-phone"></i>
+                        </label>
+                                                <input type="text" placeholder="telephone or mobile" required id="phone"  name="telephone">
+                                                <ul>
+                                                    {% for error in form.telephone.errors %}
+                                                        <li style="color:red;">{{ error }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <!-- end phone -->
+                                        <!-- start file -->
+                                        <div class="j-unit">
+                                            <div class="j-input j-append-big-btn">
+                                            <label class="j-icon-left" for="file_input">
+                    <i class="icofont icofont-paper-clip"></i>
+                </label>
+
+                                        <div class="j-file-button">
+                                            Browse
+                                                <input type="file" name="avatar" onchange="document.getElementById('file_input').value = this.value;">
+                                        </div>
+                                        <input type="text" id="file_input" readonly="" name="avatar" placeholder="no picture profil selected">
+                                        <span class="j-hint">Only: jpg / png / jpeg, less 1Mb</span>
+                                    </div>
+                                </div>
+                                        {{ form.recaptcha }}
+                                <!-- end file -->
+                                        <!-- start response from server -->
+                                        <div class="j-response"></div>
+                                        <!-- end response from server -->
+                                    </div>
+                                    <!-- end /.content -->
+                                    <div class="j-footer">
+                                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                                        <button type="reset" class="btn btn-default m-r-20">Reset</button>
+                                    </div>
+                                    <!-- end /.footer -->
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Contact details card end -->
+                </div>
+            </div>
+        </div>
+{% endblock %}
+
+{% block script %}
+<!-- FORMULAIRE SCRIPT -->
+    <script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/jquery/js/jquery.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/jquery-ui/js/jquery-ui.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/popper.js/js/popper.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/bootstrap/js/bootstrap.min.js')}}"></script>
+    <!-- j-pro js -->
+    <script type="text/javascript" src="{{url_for('static',filename='./files/assets/pages/j-pro/js/jquery.ui.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='./files/assets/pages/j-pro/js/jquery.maskedinput.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='./files/assets/pages/j-pro/js/jquery.j-pro.js')}}"></script>
+    <!-- jquery slimscroll js -->
+    <script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/jquery-slimscroll/js/jquery.slimscroll.js')}}"></script>
+    <!-- modernizr js -->
+    <script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/modernizr/js/modernizr.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/modernizr/js/css-scrollbars.js')}}"></script>
+
+    <!-- i18next.min.js -->
+    <script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/i18next/js/i18next.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/i18next-xhr-backend/js/i18nextXHRBackend.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/i18next-browser-languagedetector/js/i18nextBrowserLanguageDetector.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/jquery-i18next/js/jquery-i18next.min.js')}}"></script>
+    <!-- Custom js -->
+    <script type="text/javascript" src="{{url_for('static',filename='./files/assets/pages/j-pro/js/custom/booking-multistep.js')}}"></script>
+
+    <!-- END FORM SCRIPT ************************************************* -->
+
+    <!-- Required Jquery -->
+    <script data-cfasync="false" src="{{url_for('static',filename='./../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js')}}"></script><script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/jquery/js/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/jquery-ui/js/jquery-ui.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/popper.js/js/popper.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/bootstrap/js/bootstrap.min.js')}}"></script>
+    <!-- jquery slimscroll js -->
+    <script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/jquery-slimscroll/js/jquery.slimscroll.js')}}"></script>
+    <!-- modernizr js -->
+    <script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/modernizr/js/modernizr.js')}}"></script>
+    <!-- Chart js -->
+    <script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/chart.js/js/Chart.js')}}"></script>
+    <!-- amchart js -->
+    <script src="{{url_for('static',filename='./files/assets/pages/widget/amchart/amcharts.js')}}"></script>
+    <script src="{{url_for('static',filename='./files/assets/pages/widget/amchart/serial.js')}}"></script>
+    <script src="{{url_for('static',filename='./files/assets/pages/widget/amchart/light.js')}}"></script>
+    <script src="{{url_for('static',filename='./files/assets/js/jquery.mCustomScrollbar.concat.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='./files/assets/js/SmoothScroll.js')}}"></script>
+    <script src="{{url_for('static',filename='./files/assets/js/pcoded.min.js')}}"></script>
+    <!-- custom js -->
+    <script src="{{url_for('static',filename='./files/assets/js/vartical-layout.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='./files/assets/pages/dashboard/custom-dashboard.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='./files/assets/js/script.min.js')}}"></script>
+{% endblock %}
+

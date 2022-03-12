@@ -1,0 +1,165 @@
+{% extends 'dashboard/index-1.htm' %}
+
+{% block style %}
+<!-- Favicon icon -->
+    <link rel="icon" href="{{url_for('static',filename='./files/assets/images/logo_sib-icon.png')}}" type="image/x-icon">
+    <!-- Google font-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
+    <!-- Required Fremwork -->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='./files/bower_components/bootstrap/css/bootstrap.min.css')}}">
+    <!-- feather Awesome -->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='./files/assets/icon/feather/css/feather.css')}}">
+
+    <!-- themify-icons line icon -->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='./files/assets/icon/themify-icons/themify-icons.css')}}">
+    <!-- ico font -->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='./files/assets/icon/icofont/css/icofont.css')}}">
+    <!-- feather Awesome -->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='./files/assets/icon/feather/css/feather.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='./files/bower_components/jquery.steps/css/jquery.steps.css')}}">
+   <!-- Select 2 css -->
+   <link rel="stylesheet" href="{{url_for('static',filename='./files/bower_components/select2/css/select2.min.css')}}">
+   <!-- Multi Select css -->
+   <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='./files/bower_components/bootstrap-multiselect/css/bootstrap-multiselect.css')}}">
+   <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='./files/bower_components/multiselect/css/multi-select.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='./files/assets/pages/j-pro/css/demo.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='./files/assets/pages/j-pro/css/font-awesome.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='./files/assets/pages/j-pro/css/j-pro-modern.css')}}">
+
+    <!-- Style.css -->
+    <!-- Style.css -->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='./files/assets/css/style.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='./files/assets/css/jquery.mCustomScrollbar.css')}}">
+
+{% endblock %}
+
+{% block content %}
+<!-- task, page, download counter  start -->
+<div class="page-header">
+    <div class="row align-items-end">
+        <div class="col-lg-8">
+            <div class="page-header-title">
+                <div class="d-inline">
+                    <h4>Edit Alarm</h4>
+                    <!-- <span>lorem ipsum dolor sit amet, consectetur adipisicing elit</span> -->
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="page-header-breadcrumb">
+                <ul class="breadcrumb-title">
+                    <li class="breadcrumb-item">
+                        <a href="{{url_for('dashboard')}}"> <i class="feather icon-home"></i> </a>
+                    </li>
+                    <li class="breadcrumb-item"><a href="{{url_for('dashboard')}}">Alarms</a></li>
+                    <li class="breadcrumb-item"><a href="{{url_for('addAlarm')}}">Edit Alarm</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page-header end -->
+
+    <!-- Page body start -->
+    <div class="page-body">
+        <div class="row">
+            <div class="col-sm-12">
+                <!-- Contact details card start -->
+                <div class="card">
+                    <div class="card-block">
+                        <div class="j-wrapper j-wrapper-640">
+                            <form action="{{ url_for('updateAlarm', id=alarm['id'])}}" method="post" class="j-pro" id="j-pro" novalidate="">
+                                {{ form.csrf_token }}
+                                <div class="j-content">
+                                    <!-- start time -->
+                                    <div class="j-unit">
+                                        <h4 class="sub-title">Time</h4>
+                                        <input class="form-control" name ="heure" value="{{ alarm['heure'] }}" required id="time" type="time">
+                                            <ul>
+                                                {% for error in form.heure.errors %}
+                                                    <li style="color:red;">{{ error }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                    </div>
+                                    <!-- end time -->
+                                    <!-- start nameAlarm -->
+                                    <div class="j-unit">
+                                        <h4 class="sub-title">Name of the alarm</h4>
+                                        <input class="form-control" name="name" value="{{ alarm['name'] }}" required type="text">
+                                            <ul>
+                                                {% for error in form.name.errors %}
+                                                    <li style="color:red;">{{ error }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                    </div>
+                                    <!-- end timeAlarm -->
+
+                                    <!-- start Days -->
+                                    <!--
+                                    <div class="j-unit">
+                                        <h4 class="sub-title">Days</h4>
+                                        <select class="js-example-basic-multiple col-sm-12" multiple="multiple">
+                                            <option value="1">Lundi</option>
+                                            <option value="2">Mardi</option>
+                                            <option value="3">Mercredi</option>
+                                        </select>
+                                    </div>
+                                    end Days -->
+
+                                    <!-- start response from server -->
+                                    <div class="j-response"></div>
+                                    <!-- end response from server -->
+                                </div>
+                                <!-- end /.content -->
+                                <div class="j-footer">
+                                    <button type="submit" class="btn btn-primary"><i class="icofont icofont-save"></i>Enregistrer</button>
+                                    <button type="reset" class="btn btn-default m-r-20">Reset</button>
+                                </div>
+                                <!-- end /.footer -->
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- Contact details card end -->
+            </div>
+        </div>
+    </div>
+    <!-- Page body end -->
+                                            <
+{% endblock %}
+
+{% block script %}
+   <!-- Required Jquery -->
+<script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/jquery/js/jquery.min.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/jquery-ui/js/jquery-ui.min.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/popper.js/js/popper.min.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/bootstrap/js/bootstrap.min.js')}}"></script>
+<!-- jquery slimscroll js -->
+<script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/jquery-slimscroll/js/jquery.slimscroll.js')}}"></script>
+<!-- modernizr js -->
+<script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/modernizr/js/modernizr.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/modernizr/js/css-scrollbars.js')}}"></script>
+
+
+<!-- i18next.min.js -->
+<script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/i18next/js/i18next.min.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/i18next-xhr-backend/js/i18nextXHRBackend.min.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/i18next-browser-languagedetector/js/i18nextBrowserLanguageDetector.min.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/jquery-i18next/js/jquery-i18next.min.js')}}"></script>
+<!-- Select 2 js -->
+<script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/select2/js/select2.full.min.js')}}"></script>
+<!-- Multiselect js -->
+<script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/bootstrap-multiselect/js/bootstrap-multiselect.js')}}">
+
+
+</script>
+<script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/multiselect/js/jquery.multi-select.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='./files/assets/js/jquery.quicksearch.js')}}"></script>
+<!-- Custom js -->
+<script type="text/javascript" src="{{url_for('static',filename='./files/assets/pages/advance-elements/select2-custom.js')}}"></script>
+<script src="{{url_for('static',filename='./files/assets/js/pcoded.min.js')}}"></script>
+<script src="{{url_for('static',filename='./files/assets/js/vartical-layout.min.js')}}"></script>
+<script src="{{url_for('static',filename='./files/assets/js/jquery.mCustomScrollbar.concat.min.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='./files/assets/js/script.js')}}"></script>
+
+{% endblock %}

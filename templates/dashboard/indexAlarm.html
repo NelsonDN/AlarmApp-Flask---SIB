@@ -1,0 +1,151 @@
+{% extends 'dashboard/index-1.htm' %}
+
+{% block style %}
+<!-- Favicon icon -->
+    <link rel="icon" href="{{url_for('static',filename='./files/assets/images/logo_sib-icon.png')}}" type="image/x-icon">
+    <!-- Google font-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
+    <!-- Required Fremwork -->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='./files/bower_components/bootstrap/css/bootstrap.min.css')}}">
+        <!-- themify-icons line icon -->
+        <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='./files/assets/icon/themify-icons/themify-icons.css')}}">
+        <!-- font awesome -->
+        <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='./files/assets/icon/font-awesome/css/font-awesome.min.css')}}">
+        <!-- feather Awesome -->
+        <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='./files/assets/icon/feather/css/feather.css')}}">
+    <!-- ico font -->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='./files/assets/icon/icofont/css/icofont.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='./files/assets/icon/ion-icon/css/ionicons.min.css')}}">
+    <!-- feather Awesome -->
+    <!-- Switch component css -->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='./files/bower_components/switchery/css/switchery.min.css')}}">
+    <!-- Tags css -->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='./files/bower_components/bootstrap-tagsinput/css/bootstrap-tagsinput.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='./files/assets/icon/feather/css/feather.css')}}">
+    <!-- Style.css -->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='./files/assets/css/style.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='./files/assets/css/jquery.mCustomScrollbar.css')}}">
+
+{% endblock %}
+
+{% block content %}
+ <!-- Page-header start -->
+        <div class="page-header">
+            <div class="row align-items-end">
+                <div class="col-lg-8">
+                    <div class="page-header-title">
+                        <div class="d-inline">
+                            <h4>List Alarms</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="page-header-breadcrumb">
+                        <ul class="breadcrumb-title">
+                            <li class="breadcrumb-item">
+                                <a href="{{url_for('dashboard')}}"> <i class="feather icon-home"></i> </a>
+                            </li>
+                            <li class="breadcrumb-item"><a href="{{url_for('dashboard')}}">Alarms</a> </li>
+                            <li class="breadcrumb-item"><a href="{{url_for('indexAlarm')}}">List Alarms</a> </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="col-sm-12 col-md-12 col-xl-12">
+        <div class="alert alert-{{ category }} background-{{ category }}">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <i class="icofont icofont-close-line-circled text-white"></i>
+            </button>
+            {{ message }}
+        </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <!-- Page-header end -->
+    <div class="row">
+        {% for alarm in alarms %}
+        <div class="col-sm-4">
+            <!-- Invoice list card start -->
+            <a href="{{ url_for('indexAlarm')}} ">
+            <div class="card card-border-primary" style="background-color:rgb(121, 118, 118);"  onmouseover=" this.style.opacity='0.9';" onmouseout="this.style.opacity='1';" >
+                <div class="card-header">
+                    <h4 style = "color:white; ">{{ alarm['heure'] }}</h4>
+                    <div class="dropdown-secondary dropdown f-right">
+                        <button class="btn btn-primary btn-mini dropdown-toggle waves-effect waves-light" type="button" id="dropdown13" style = "color:white; " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Active</button>
+                        <div class="dropdown-menu" style = "color:white; " aria-labelledby="dropdown13" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
+                            <a class="dropdown-item waves-light waves-effect" href="#!"><span class="point-marker bg-danger"></span>Active</a>
+                            <a class="dropdown-item waves-light waves-effect" href="#!"><span class="point-marker bg-warning"></span>Desactivated</a>
+                        </div>
+                        <!-- end of dropdown menu -->
+                        <span class="f-left m-r-5 " style = "color:white;">Status : </span>
+                    </div>
+                </div>
+                <div class="card-block">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <ul class="list list-unstyled" style = "color:white; ">
+                                <li>{{ alarm['name'] }}</li>
+                                <li><i class="icofont icofont-ui-alarm"></i><span class="text-semibold" style="font-size: smaller;"> dans 30 minutes </span></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-6">
+                            <ul class="list list-unstyled text-right" style = "color:white; ">
+                                <li> <a href="{{ url_for('editAlarm', id=alarm['id']) }} "><button class="btn-mini btn" style="background-color: rgb(165, 230, 139); border-color: rgb(165, 230, 139);"  title="Modifier"><i class="ion-edit" style = "color:white; "></i></button></a> <a href="{{ url_for('deleteAlarm', id=alarm['id']) }}"><button class="btn-mini btn" onclick="return ConfirmDelete();" style="background-color: brown; border-color: brown;" title="Supprimer" ><i class="ion-trash-a" style="color: white;"></i></button></a> </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </a>
+            <!-- Invoice list card end -->
+        </div>
+        {% endfor %}
+
+    </div>
+
+{% endblock %}
+
+{% block script %}
+<!-- Required Jquery -->
+    <script>
+    function ConfirmDelete()
+    {
+      return confirm("Are you sure you want to delete?");
+    }
+    </script>
+    <script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/jquery/js/jquery.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/jquery-ui/js/jquery-ui.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/popper.js/js/popper.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/bootstrap/js/bootstrap.min.js')}}"></script>
+    <!-- jquery slimscroll js -->
+    <script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/jquery-slimscroll/js/jquery.slimscroll.js')}}"></script>
+    <!-- modernizr js -->
+    <script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/modernizr/js/modernizr.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/modernizr/js/css-scrollbars.js')}}"></script>
+
+    <!-- Switch component js -->
+    <script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/switchery/js/switchery.min.js')}}"></script>
+    <!-- Tags js -->
+    <script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/bootstrap-tagsinput/js/bootstrap-tagsinput.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.4/typeahead.bundle.min.js')}}"></script>
+    <!-- Max-length js -->
+    <script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/bootstrap-maxlength/js/bootstrap-maxlength.js')}}"></script>
+    <!-- i18next.min.js -->
+    <script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/i18next/js/i18next.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/i18next-xhr-backend/js/i18nextXHRBackend.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/i18next-browser-languagedetector/js/i18nextBrowserLanguageDetector.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='./files/bower_components/jquery-i18next/js/jquery-i18next.min.js')}}"></script>
+    <!-- Custom js -->
+
+    <script type="text/javascript" src="{{url_for('static',filename='./files/assets/pages/advance-elements/swithces.js')}}"></script>
+    <script src="{{url_for('static',filename='./files/assets/js/pcoded.min.js')}}"></script>
+    <script src="{{url_for('static',filename='./files/assets/js/vartical-layout.min.js')}}"></script>
+    <script src="{{url_for('static',filename='./files/assets/js/jquery.mCustomScrollbar.concat.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='./files/assets/js/script.js')}}"></script>
+
+{% endblock %}
